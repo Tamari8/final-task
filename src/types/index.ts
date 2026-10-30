@@ -93,3 +93,12 @@ export interface CartContextType {
   addNotification: (title: string, message: string, type?: NotificationType) => void;
   dismissNotification: (id: string) => void;
 }
+
+export type Theme = 'light' | 'dark';
+
+export interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
+}
+

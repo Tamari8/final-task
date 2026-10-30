@@ -168,7 +168,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
     []
   );
 
-  // Clear existing error on input change (per modern-web-guidance Validation Event Timing Matrix)
+  // Clear existing error on input change
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -197,7 +197,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
     }
   };
 
-  // Validate on blur after user finishes interacting with the field
+  // Validate on blur
   const handleBlur = (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -311,19 +311,19 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="space-y-8 rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-xs"
+      className="space-y-8 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xs transition-colors duration-200"
     >
       {/* Section 1: Customer Contact Info */}
       <fieldset className="space-y-5">
-        <legend className="text-lg font-extrabold text-slate-900 border-b border-slate-100 pb-3 w-full">
+        <legend className="text-lg font-extrabold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 w-full">
           1. საკონტაქტო ინფორმაცია
         </legend>
 
-        {/* Full Name (Single field per modern-web-guidance) */}
+        {/* Full Name */}
         <div>
           <label
             htmlFor="checkout-fullName"
-            className="mb-1.5 block text-xs font-bold text-slate-800"
+            className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
           >
             სრული სახელი და გვარი <span className="text-rose-600">*</span>
           </label>
@@ -340,23 +340,23 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
             placeholder="მაგ: გიორგი ბერიძე"
             aria-invalid={Boolean(touched.fullName && errors.fullName)}
             aria-describedby={errors.fullName ? 'fullName-error' : 'fullName-hint'}
-            className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 transition-colors ${
+            className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 dark:text-white transition-colors ${
               touched.fullName && errors.fullName
-                ? 'border-rose-400 bg-rose-50/40'
-                : 'border-slate-300 bg-white focus:border-indigo-600'
+                ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
             }`}
           />
           {touched.fullName && errors.fullName ? (
             <p
               id="fullName-error"
               role="alert"
-              className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+              className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
             >
               <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               <span>{errors.fullName}</span>
             </p>
           ) : (
-            <p id="fullName-hint" className="mt-1 text-[11px] text-slate-400">
+            <p id="fullName-hint" className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
               მიუთითეთ მიმღების სახელი და გვარი პირადობის მიხედვით.
             </p>
           )}
@@ -367,7 +367,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
           <div>
             <label
               htmlFor="checkout-email"
-              className="mb-1.5 block text-xs font-bold text-slate-800"
+              className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
             >
               ელ-ფოსტა <span className="text-rose-600">*</span>
             </label>
@@ -387,17 +387,17 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               placeholder="name@example.com"
               aria-invalid={Boolean(touched.email && errors.email)}
               aria-describedby={errors.email ? 'email-error' : undefined}
-              className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 transition-colors ${
+              className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 dark:text-white transition-colors ${
                 touched.email && errors.email
-                  ? 'border-rose-400 bg-rose-50/40'
-                  : 'border-slate-300 bg-white focus:border-indigo-600'
+                  ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                  : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
               }`}
             />
             {touched.email && errors.email && (
               <p
                 id="email-error"
                 role="alert"
-                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
               >
                 <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <span>{errors.email}</span>
@@ -409,7 +409,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
           <div>
             <label
               htmlFor="checkout-phone"
-              className="mb-1.5 block text-xs font-bold text-slate-800"
+              className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
             >
               მობილურის ნომერი (Custom Validation) <span className="text-rose-600">*</span>
             </label>
@@ -427,23 +427,23 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               placeholder="+995 555 12 34 56"
               aria-invalid={Boolean(touched.phone && errors.phone)}
               aria-describedby={errors.phone ? 'phone-error' : 'phone-hint'}
-              className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 transition-colors ${
+              className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 dark:text-white transition-colors ${
                 touched.phone && errors.phone
-                  ? 'border-rose-400 bg-rose-50/40'
-                  : 'border-slate-300 bg-white focus:border-indigo-600'
+                  ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                  : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
               }`}
             />
             {touched.phone && errors.phone ? (
               <p
                 id="phone-error"
                 role="alert"
-                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
               >
                 <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <span>{errors.phone}</span>
               </p>
             ) : (
-              <p id="phone-hint" className="mt-1 text-[11px] text-slate-400">
+              <p id="phone-hint" className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
                 ფორმატი: +995 5XX XX XX XX ან 5XXXXXXXX
               </p>
             )}
@@ -453,7 +453,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
 
       {/* Section 2: Shipping Address */}
       <fieldset className="space-y-5">
-        <legend className="text-lg font-extrabold text-slate-900 border-b border-slate-100 pb-3 w-full">
+        <legend className="text-lg font-extrabold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 w-full">
           2. მიწოდების მისამართი
         </legend>
 
@@ -461,7 +461,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
           <div className="sm:col-span-2">
             <label
               htmlFor="checkout-city"
-              className="mb-1.5 block text-xs font-bold text-slate-800"
+              className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
             >
               ქალაქი / რეგიონი <span className="text-rose-600">*</span>
             </label>
@@ -478,17 +478,17 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               placeholder="თბილისი, ბათუმი, ქუთაისი..."
               aria-invalid={Boolean(touched.city && errors.city)}
               aria-describedby={errors.city ? 'city-error' : undefined}
-              className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 transition-colors ${
+              className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 dark:text-white transition-colors ${
                 touched.city && errors.city
-                  ? 'border-rose-400 bg-rose-50/40'
-                  : 'border-slate-300 bg-white focus:border-indigo-600'
+                  ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                  : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
               }`}
             />
             {touched.city && errors.city && (
               <p
                 id="city-error"
                 role="alert"
-                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
               >
                 <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <span>{errors.city}</span>
@@ -496,13 +496,12 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
             )}
           </div>
 
-          {/* Optional Postal Code per modern-web-guidance */}
           <div>
             <label
               htmlFor="checkout-postalCode"
-              className="mb-1.5 block text-xs font-bold text-slate-800"
+              className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
             >
-              საფოსტო ინდექსი <span className="text-slate-400 font-normal">(არასავალდებულო)</span>
+              საფოსტო ინდექსი <span className="text-slate-400 dark:text-slate-500 font-normal">(არასავალდებულო)</span>
             </label>
             <input
               id="checkout-postalCode"
@@ -517,17 +516,17 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               placeholder="0160"
               aria-invalid={Boolean(touched.postalCode && errors.postalCode)}
               aria-describedby={errors.postalCode ? 'postal-error' : undefined}
-              className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 transition-colors ${
+              className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base text-slate-900 dark:text-white transition-colors ${
                 touched.postalCode && errors.postalCode
-                  ? 'border-rose-400 bg-rose-50/40'
-                  : 'border-slate-300 bg-white focus:border-indigo-600'
+                  ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                  : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
               }`}
             />
             {touched.postalCode && errors.postalCode && (
               <p
                 id="postal-error"
                 role="alert"
-                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
               >
                 <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <span>{errors.postalCode}</span>
@@ -536,11 +535,10 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
           </div>
         </div>
 
-        {/* Street Address using textarea per modern-web-guidance Section 9 */}
         <div>
           <label
             htmlFor="checkout-address"
-            className="mb-1.5 block text-xs font-bold text-slate-800"
+            className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
           >
             ზუსტი მისამართი (ქუჩა, კორპუსი, ბინა) <span className="text-rose-600">*</span>
           </label>
@@ -556,17 +554,17 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
             placeholder="მაგ: ჭავჭავაძის გამზ. #34, სადარბაზო 2, სართული 5, ბინა 18"
             aria-invalid={Boolean(touched.address && errors.address)}
             aria-describedby={errors.address ? 'address-error' : undefined}
-            className={`w-full rounded-xl border px-4 py-2.5 text-base text-slate-900 transition-colors ${
+            className={`w-full rounded-xl border px-4 py-2.5 text-base text-slate-900 dark:text-white transition-colors ${
               touched.address && errors.address
-                ? 'border-rose-400 bg-rose-50/40'
-                : 'border-slate-300 bg-white focus:border-indigo-600'
+                ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
             }`}
           />
           {touched.address && errors.address && (
             <p
               id="address-error"
               role="alert"
-              className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+              className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
             >
               <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               <span>{errors.address}</span>
@@ -576,14 +574,14 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
       </fieldset>
 
       {/* Section 3: Custom Validation #2 — Promo Code Verification */}
-      <fieldset className="space-y-3 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-5">
+      <fieldset className="space-y-3 rounded-2xl border border-indigo-100 dark:border-indigo-900/50 bg-indigo-50/50 dark:bg-indigo-950/30 p-5">
         <legend className="sr-only">პრომო-კოდი და ფასდაკლება</legend>
         <div className="flex items-center justify-between">
           <label
             htmlFor="checkout-promoCode"
-            className="flex items-center gap-2 text-xs font-bold text-slate-800"
+            className="flex items-center gap-2 text-xs font-bold text-slate-800 dark:text-slate-200"
           >
-            <Tag className="h-4 w-4 text-indigo-600" aria-hidden="true" />
+            <Tag className="h-4 w-4 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
             <span>პრომო-კოდის შემოწმება (Custom Validation)</span>
           </label>
           {appliedPromo && (
@@ -594,7 +592,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
                 setFormData((prev) => ({ ...prev, promoCode: '' }));
                 setPromoFeedback(null);
               }}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-rose-600 hover:underline cursor-pointer"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:underline cursor-pointer"
             >
               <X className="h-3.5 w-3.5" aria-hidden="true" />
               <span>გაუქმება ({appliedPromo.code})</span>
@@ -617,12 +615,12 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
             placeholder="მაგ: SHOPFLOW20"
             aria-invalid={Boolean(errors.promoCode)}
             aria-describedby="promoCode-feedback"
-            className="flex-1 min-h-[48px] rounded-xl border border-slate-300 bg-white px-4 py-2 text-base font-semibold uppercase tracking-wider text-slate-900 placeholder:normal-case placeholder:font-normal placeholder:tracking-normal"
+            className="flex-1 min-h-[48px] rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-base font-semibold uppercase tracking-wider text-slate-900 dark:text-white placeholder:normal-case placeholder:font-normal placeholder:tracking-normal"
           />
           <button
             type="button"
             onClick={handleApplyPromo}
-            className="min-h-[48px] rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-bold text-white hover:bg-indigo-600 transition-colors cursor-pointer shrink-0"
+            className="min-h-[48px] rounded-xl bg-slate-900 dark:bg-indigo-600 px-5 py-2.5 text-xs font-bold text-white hover:bg-indigo-600 dark:hover:bg-indigo-500 transition-colors cursor-pointer shrink-0"
           >
             კოდის შემოწმება
           </button>
@@ -630,7 +628,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
 
         {/* Quick-Apply Promo Chips */}
         <div className="flex flex-wrap items-center gap-2 pt-1">
-          <span className="text-[11px] font-medium text-slate-500">ხელმისაწვდომი კოდები:</span>
+          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">ხელმისაწვდომი კოდები:</span>
           {(['SHOPFLOW20', 'STUDENT15', 'SALE10'] as const).map((code) => (
             <button
               key={code}
@@ -639,7 +637,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               className={`inline-flex items-center gap-1 rounded-lg border px-2.5 py-1 text-[11px] font-bold transition-colors cursor-pointer ${
                 appliedPromo?.code === code
                   ? 'border-indigo-600 bg-indigo-600 text-white'
-                  : 'border-indigo-200 bg-white text-indigo-700 hover:bg-indigo-100'
+                  : 'border-indigo-200 dark:border-indigo-800 bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/40'
               }`}
             >
               <Sparkles className="h-3 w-3" aria-hidden="true" />
@@ -652,7 +650,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
           {promoFeedback && (
             <p
               className={`mt-1 flex items-center gap-1.5 text-xs font-semibold ${
-                promoFeedback.type === 'success' ? 'text-emerald-700' : 'text-rose-600'
+                promoFeedback.type === 'success' ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'
               }`}
             >
               {promoFeedback.type === 'success' ? (
@@ -664,7 +662,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
             </p>
           )}
           {!promoFeedback && touched.promoCode && errors.promoCode && (
-            <p className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-rose-600">
+            <p className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-rose-600 dark:text-rose-400">
               <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
               <span>{errors.promoCode}</span>
             </p>
@@ -672,9 +670,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
         </div>
       </fieldset>
 
-      {/* Section 4: Payment Method (Visible radio controls per modern-web-guidance Selection Control Matrix) */}
+      {/* Section 4: Payment Method */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-extrabold text-slate-900 border-b border-slate-100 pb-3 w-full">
+        <legend className="text-lg font-extrabold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 w-full">
           3. გადახდის მეთოდი
         </legend>
 
@@ -683,8 +681,8 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
             htmlFor="payment-card"
             className={`flex items-center gap-3.5 rounded-2xl border p-4 cursor-pointer transition-all ${
               formData.paymentMethod === 'card'
-                ? 'border-indigo-600 bg-indigo-50/40 ring-2 ring-indigo-600/15'
-                : 'border-slate-200 bg-white hover:border-slate-300'
+                ? 'border-indigo-600 bg-indigo-50/40 dark:bg-indigo-950/40 ring-2 ring-indigo-600/15'
+                : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700'
             }`}
           >
             <input
@@ -696,12 +694,12 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               onChange={handleChange}
               className="h-4 w-4 accent-indigo-600"
             />
-            <CreditCard className="h-5 w-5 text-indigo-600 shrink-0" aria-hidden="true" />
+            <CreditCard className="h-5 w-5 text-indigo-600 dark:text-indigo-400 shrink-0" aria-hidden="true" />
             <div>
-              <span className="block text-sm font-bold text-slate-900">
+              <span className="block text-sm font-bold text-slate-900 dark:text-white">
                 საბანკო ბარათით
               </span>
-              <span className="block text-xs text-slate-500">
+              <span className="block text-xs text-slate-500 dark:text-slate-400">
                 Visa, Mastercard, Amex
               </span>
             </div>
@@ -711,8 +709,8 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
             htmlFor="payment-cod"
             className={`flex items-center gap-3.5 rounded-2xl border p-4 cursor-pointer transition-all ${
               formData.paymentMethod === 'cash_on_delivery'
-                ? 'border-indigo-600 bg-indigo-50/40 ring-2 ring-indigo-600/15'
-                : 'border-slate-200 bg-white hover:border-slate-300'
+                ? 'border-indigo-600 bg-indigo-50/40 dark:bg-indigo-950/40 ring-2 ring-indigo-600/15'
+                : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700'
             }`}
           >
             <input
@@ -724,12 +722,12 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               onChange={handleChange}
               className="h-4 w-4 accent-indigo-600"
             />
-            <Banknote className="h-5 w-5 text-emerald-600 shrink-0" aria-hidden="true" />
+            <Banknote className="h-5 w-5 text-emerald-600 dark:text-emerald-400 shrink-0" aria-hidden="true" />
             <div>
-              <span className="block text-sm font-bold text-slate-900">
+              <span className="block text-sm font-bold text-slate-900 dark:text-white">
                 კურიერთან გადახდა
               </span>
-              <span className="block text-xs text-slate-500">
+              <span className="block text-xs text-slate-500 dark:text-slate-400">
                 ნაღდი ანგარიშსწორებით ან ტერმინალით
               </span>
             </div>
@@ -738,11 +736,11 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
 
         {/* Card Details Sub-form */}
         {formData.paymentMethod === 'card' && (
-          <div className="mt-4 space-y-4 rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
+          <div className="mt-4 space-y-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 p-5">
             <div>
               <label
                 htmlFor="checkout-cardNumber"
-                className="mb-1.5 block text-xs font-bold text-slate-800"
+                className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
               >
                 ბარათის 16-ნიშნა ნომერი <span className="text-rose-600">*</span>
               </label>
@@ -759,17 +757,17 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
                 placeholder="4000 1234 5678 9010"
                 aria-invalid={Boolean(touched.cardNumber && errors.cardNumber)}
                 aria-describedby={errors.cardNumber ? 'cardNumber-error' : undefined}
-                className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base font-mono tracking-wider text-slate-900 transition-colors ${
+                className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base font-mono tracking-wider text-slate-900 dark:text-white transition-colors ${
                   touched.cardNumber && errors.cardNumber
-                    ? 'border-rose-400 bg-rose-50/40'
-                    : 'border-slate-300 bg-white focus:border-indigo-600'
+                    ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                    : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
                 }`}
               />
               {touched.cardNumber && errors.cardNumber && (
                 <p
                   id="cardNumber-error"
                   role="alert"
-                  className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+                  className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
                 >
                   <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                   <span>{errors.cardNumber}</span>
@@ -781,7 +779,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               <div>
                 <label
                   htmlFor="checkout-cardExpiry"
-                  className="mb-1.5 block text-xs font-bold text-slate-800"
+                  className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
                 >
                   ვადა (MM/YY) <span className="text-rose-600">*</span>
                 </label>
@@ -798,17 +796,17 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
                   placeholder="08/28"
                   aria-invalid={Boolean(touched.cardExpiry && errors.cardExpiry)}
                   aria-describedby={errors.cardExpiry ? 'cardExpiry-error' : undefined}
-                  className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base font-mono text-slate-900 transition-colors ${
+                  className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base font-mono text-slate-900 dark:text-white transition-colors ${
                     touched.cardExpiry && errors.cardExpiry
-                      ? 'border-rose-400 bg-rose-50/40'
-                      : 'border-slate-300 bg-white focus:border-indigo-600'
+                      ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                      : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
                   }`}
                 />
                 {touched.cardExpiry && errors.cardExpiry && (
                   <p
                     id="cardExpiry-error"
                     role="alert"
-                    className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+                    className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
                   >
                     <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                     <span>{errors.cardExpiry}</span>
@@ -819,7 +817,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               <div>
                 <label
                   htmlFor="checkout-cardCvc"
-                  className="mb-1.5 block text-xs font-bold text-slate-800"
+                  className="mb-1.5 block text-xs font-bold text-slate-800 dark:text-slate-200"
                 >
                   CVC / CVV <span className="text-rose-600">*</span>
                 </label>
@@ -836,17 +834,17 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
                   placeholder="123"
                   aria-invalid={Boolean(touched.cardCvc && errors.cardCvc)}
                   aria-describedby={errors.cardCvc ? 'cardCvc-error' : undefined}
-                  className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base font-mono text-slate-900 transition-colors ${
+                  className={`w-full min-h-[48px] rounded-xl border px-4 py-2.5 text-base font-mono text-slate-900 dark:text-white transition-colors ${
                     touched.cardCvc && errors.cardCvc
-                      ? 'border-rose-400 bg-rose-50/40'
-                      : 'border-slate-300 bg-white focus:border-indigo-600'
+                      ? 'border-rose-400 bg-rose-50/40 dark:bg-rose-950/40'
+                      : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-indigo-600'
                   }`}
                 />
                 {touched.cardCvc && errors.cardCvc && (
                   <p
                     id="cardCvc-error"
                     role="alert"
-                    className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600"
+                    className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400"
                   >
                     <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                     <span>{errors.cardCvc}</span>
@@ -858,7 +856,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
         )}
       </fieldset>
 
-      {/* Submit Button (Not disabled before submission per modern-web-guidance Section 4; disabled only while submitting) */}
+      {/* Submit Button */}
       <div className="pt-2">
         <button
           type="submit"
@@ -872,7 +870,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ onOrderSuccess }) =>
               : `შეკვეთის დადასტურება — $${totalAmount.toFixed(2)}`}
           </span>
         </button>
-        <p className="mt-2.5 text-center text-xs text-slate-400">
+        <p className="mt-2.5 text-center text-xs text-slate-400 dark:text-slate-500">
           უსაფრთხო 256-bit SSL დაშიფვრა • 30-დღიანი დაბრუნების გარანტია
         </p>
       </div>

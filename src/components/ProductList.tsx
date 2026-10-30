@@ -98,15 +98,15 @@ export const ProductList: React.FC<ProductListProps> = ({
     return (
       <div
         role="alert"
-        className="mx-auto my-8 max-w-2xl rounded-2xl border border-rose-200 bg-rose-50/80 p-8 text-center shadow-xs"
+        className="mx-auto my-8 max-w-2xl rounded-2xl border border-rose-200 dark:border-rose-900/60 bg-rose-50/80 dark:bg-rose-950/40 p-8 text-center shadow-xs"
       >
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-100 text-rose-600">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400">
           <AlertCircle className="h-7 w-7" aria-hidden="true" />
         </div>
-        <h2 className="text-lg font-bold text-slate-900">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-white">
           მონაცემების ჩატვირთვა ვერ მოხერხდა
         </h2>
-        <p className="mt-2 text-sm text-slate-600 leading-relaxed">{error}</p>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{error}</p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <button
             type="button"
@@ -124,19 +124,19 @@ export const ProductList: React.FC<ProductListProps> = ({
   return (
     <section aria-label="პროდუქტების კატალოგი" className="space-y-6">
       {/* Filter & Search Bar */}
-      <div className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-xs space-y-4">
+      <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 sm:p-5 shadow-xs space-y-4 transition-colors duration-200">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-12 items-end">
           {/* Search Input */}
           <div className="md:col-span-5">
             <label
               htmlFor="catalog-search"
-              className="mb-1.5 block text-xs font-semibold text-slate-700"
+              className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300"
             >
               პროდუქტის ძიება
             </label>
             <div className="relative">
               <Search
-                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500"
                 aria-hidden="true"
               />
               <input
@@ -149,14 +149,14 @@ export const ProductList: React.FC<ProductListProps> = ({
                 autoCorrect="off"
                 autoCapitalize="off"
                 spellCheck={false}
-                className="w-full min-h-[44px] rounded-xl border border-slate-200 bg-slate-50/60 pl-10 pr-9 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white transition-colors"
+                className="w-full min-h-[44px] rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800 pl-10 pr-9 py-2 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-800 transition-colors"
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery('')}
                   aria-label="ძიების გასუფთავება"
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-lg p-1 text-slate-400 hover:bg-slate-200/60 hover:text-slate-600 cursor-pointer"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-lg p-1 text-slate-400 dark:text-slate-500 hover:bg-slate-200/60 dark:hover:bg-slate-700 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer"
                 >
                   <X className="h-4 w-4" aria-hidden="true" />
                 </button>
@@ -168,20 +168,20 @@ export const ProductList: React.FC<ProductListProps> = ({
           <div className="md:col-span-4">
             <label
               htmlFor="catalog-sort"
-              className="mb-1.5 block text-xs font-semibold text-slate-700"
+              className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300"
             >
               დალაგება
             </label>
             <div className="relative">
               <SlidersHorizontal
-                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500"
                 aria-hidden="true"
               />
               <select
                 id="catalog-sort"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="w-full min-h-[44px] rounded-xl border border-slate-200 bg-slate-50/60 pl-10 pr-4 py-2 text-sm font-medium text-slate-900 focus:border-indigo-500 focus:bg-white transition-colors cursor-pointer"
+                className="w-full min-h-[44px] rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800 pl-10 pr-4 py-2 text-sm font-medium text-slate-900 dark:text-white focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-800 transition-colors cursor-pointer"
               >
                 <option value="featured">რჩეული (Default)</option>
                 <option value="price-asc">ფასი: ზრდადობით</option>
@@ -195,10 +195,10 @@ export const ProductList: React.FC<ProductListProps> = ({
           {/* Max Price Range Filter */}
           <div className="md:col-span-3">
             <div className="mb-1.5 flex items-center justify-between text-xs">
-              <label htmlFor="catalog-price-range" className="font-semibold text-slate-700">
+              <label htmlFor="catalog-price-range" className="font-semibold text-slate-700 dark:text-slate-300">
                 მაქს. ფასი:
               </label>
-              <span className="font-bold text-indigo-600">${maxPrice}</span>
+              <span className="font-bold text-indigo-600 dark:text-indigo-400">${maxPrice}</span>
             </div>
             <input
               id="catalog-price-range"
@@ -208,13 +208,13 @@ export const ProductList: React.FC<ProductListProps> = ({
               step={5}
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="w-full accent-indigo-600 cursor-pointer h-2 rounded-lg bg-slate-200"
+              className="w-full accent-indigo-600 cursor-pointer h-2 rounded-lg bg-slate-200 dark:bg-slate-700"
             />
           </div>
         </div>
 
         {/* Category Pills & Diagnostic Controls */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3.5">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800 pt-3.5">
           <div
             role="group"
             aria-label="კატეგორიის ფილტრი"
@@ -230,7 +230,7 @@ export const ProductList: React.FC<ProductListProps> = ({
                   className={`rounded-xl px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
                     isSelected
                       ? 'bg-indigo-600 text-white shadow-xs shadow-indigo-600/25'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80 hover:text-slate-900'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200/80 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   {getCategoryLabel(cat)}
@@ -239,13 +239,13 @@ export const ProductList: React.FC<ProductListProps> = ({
             })}
           </div>
 
-          <div className="flex items-center gap-3 text-xs text-slate-500">
+          <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
             <span>
-              ნაჩვენებია <strong className="text-slate-900">{filteredProducts.length}</strong>{' '}
+              ნაჩვენებია <strong className="text-slate-900 dark:text-white">{filteredProducts.length}</strong>{' '}
               პროდუქტი
             </span>
             {isUsingFallback && (
-              <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-[11px] font-semibold text-amber-800">
+              <span className="rounded-full bg-amber-100 dark:bg-amber-950/60 px-2.5 py-0.5 text-[11px] font-semibold text-amber-800 dark:text-amber-300">
                 Offline კატალოგი
               </span>
             )}
@@ -253,7 +253,7 @@ export const ProductList: React.FC<ProductListProps> = ({
               type="button"
               onClick={() => onRetry(true)}
               title="შეცდომის (Error State) ვიზუალური ტესტირება"
-              className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1 text-[11px] font-medium text-slate-500 hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 rounded-lg border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-[11px] font-medium text-slate-500 dark:text-slate-400 hover:border-rose-200 hover:bg-rose-50 dark:hover:bg-rose-950/50 hover:text-rose-600 dark:hover:text-rose-400 transition-colors cursor-pointer"
             >
               <Bug className="h-3 w-3" aria-hidden="true" />
               <span>Error ტესტი</span>
@@ -272,29 +272,29 @@ export const ProductList: React.FC<ProductListProps> = ({
           {Array.from({ length: 8 }).map((_, idx) => (
             <div
               key={`skeleton-${idx}`}
-              className="flex flex-col overflow-hidden rounded-2xl border border-slate-200/70 bg-white p-5 shadow-xs animate-pulse"
+              className="flex flex-col overflow-hidden rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs animate-pulse"
             >
-              <div className="h-52 w-full rounded-xl bg-slate-200/70" />
-              <div className="mt-4 h-3 w-24 rounded-full bg-slate-200" />
-              <div className="mt-3 h-4 w-full rounded-full bg-slate-200" />
-              <div className="mt-2 h-4 w-2/3 rounded-full bg-slate-200" />
-              <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                <div className="h-6 w-16 rounded-lg bg-slate-200" />
-                <div className="h-9 w-28 rounded-xl bg-slate-200" />
+              <div className="h-52 w-full rounded-xl bg-slate-200/70 dark:bg-slate-800" />
+              <div className="mt-4 h-3 w-24 rounded-full bg-slate-200 dark:bg-slate-800" />
+              <div className="mt-3 h-4 w-full rounded-full bg-slate-200 dark:bg-slate-800" />
+              <div className="mt-2 h-4 w-2/3 rounded-full bg-slate-200 dark:bg-slate-800" />
+              <div className="mt-6 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-4">
+                <div className="h-6 w-16 rounded-lg bg-slate-200 dark:bg-slate-800" />
+                <div className="h-9 w-28 rounded-xl bg-slate-200 dark:bg-slate-800" />
               </div>
             </div>
           ))}
         </div>
       ) : filteredProducts.length === 0 ? (
         /* Empty Filter State */
-        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-500">
+        <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-12 text-center transition-colors duration-200">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
             <PackageSearch className="h-6 w-6" aria-hidden="true" />
           </div>
-          <h3 className="text-base font-bold text-slate-900">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white">
             პროდუქტები ვერ მოიძებნა
           </h3>
-          <p className="mt-1 text-xs text-slate-500 max-w-md mx-auto">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
             თქვენს მიერ არჩეული ფილტრის ან საძიებო სიტყვის შესაბამისი პროდუქტი არ მოიძებნა.
           </p>
           <button

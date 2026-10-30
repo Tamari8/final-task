@@ -31,10 +31,10 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(
     };
 
     return (
-      <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-950/5">
+      <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 dark:hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-950/5 dark:hover:shadow-indigo-950/20">
         {/* Category & Cart Status Badges */}
         <div className="absolute top-3 left-3 right-3 z-10 flex items-center justify-between gap-2 pointer-events-none">
-          <span className="inline-flex items-center rounded-full bg-slate-900/80 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
+          <span className="inline-flex items-center rounded-full bg-slate-900/80 dark:bg-slate-800/90 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
             {getCategoryLabel(product.category)}
           </span>
           {quantityInCart > 0 && (
@@ -47,7 +47,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(
         {/* Product Image Container */}
         <Link
           to={`/products/${product.id}`}
-          className="relative flex h-60 w-full items-center justify-center bg-gradient-to-b from-slate-50/70 to-white p-6 overflow-hidden"
+          className="relative flex h-60 w-full items-center justify-center bg-gradient-to-b from-slate-50/70 to-white dark:from-slate-800/40 dark:to-slate-900/80 p-6 overflow-hidden"
         >
           <img
             src={product.image}
@@ -60,9 +60,9 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(
             className="max-h-44 w-auto object-contain transition-transform duration-500 group-hover:scale-108"
           />
 
-          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 opacity-0 transition-all duration-300 group-hover:bg-slate-900/10 group-hover:opacity-100">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3.5 py-1.5 text-xs font-semibold text-slate-900 shadow-md">
-              <Eye className="h-3.5 w-3.5 text-indigo-600" aria-hidden="true" />
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 opacity-0 transition-all duration-300 group-hover:bg-slate-900/20 group-hover:opacity-100">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 dark:bg-slate-800/95 px-3.5 py-1.5 text-xs font-semibold text-slate-900 dark:text-white shadow-md">
+              <Eye className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
               <span>დეტალურად</span>
             </span>
           </div>
@@ -76,30 +76,30 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(
               <div className="flex items-center text-amber-400" aria-hidden="true">
                 <Star className="h-4 w-4 fill-amber-400" />
               </div>
-              <span className="text-xs font-bold text-slate-800">
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
                 {product.rating.rate.toFixed(1)}
               </span>
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-slate-400 dark:text-slate-500">
                 ({product.rating.count} შეფასება)
               </span>
             </div>
 
             {/* Title */}
-            <h3 className="text-sm font-bold text-slate-900 line-clamp-2 group-hover:text-indigo-600 transition-colors leading-snug">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
               <Link to={`/products/${product.id}`}>{product.title}</Link>
             </h3>
 
             {/* Short Description */}
-            <p className="mt-1.5 text-xs text-slate-500 line-clamp-2 leading-relaxed">
+            <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
               {product.description}
             </p>
           </div>
 
           {/* Price and Add to Cart Button */}
-          <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-3.5">
+          <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800 pt-3.5">
             <div>
-              <span className="block text-[11px] font-medium text-slate-400">ფასი</span>
-              <span className="text-lg font-extrabold text-slate-900">
+              <span className="block text-[11px] font-medium text-slate-400 dark:text-slate-500">ფასი</span>
+              <span className="text-lg font-extrabold text-slate-900 dark:text-white">
                 ${product.price.toFixed(2)}
               </span>
             </div>

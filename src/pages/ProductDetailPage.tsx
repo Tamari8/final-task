@@ -22,6 +22,7 @@ import {
 } from '../services/productService';
 import { useCart } from '../hooks/useCart';
 import { ProductCard } from '../components/ProductCard';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -88,18 +89,18 @@ export const ProductDetailPage: React.FC = () => {
     return (
       <div
         aria-busy="true"
-        className="animate-pulse space-y-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-10"
+        className="animate-pulse space-y-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10"
       >
-        <div className="h-5 w-40 rounded-lg bg-slate-200" />
+        <div className="h-5 w-40 rounded-lg bg-slate-200 dark:bg-slate-800" />
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-          <div className="h-96 rounded-2xl bg-slate-200/70" />
+          <div className="h-96 rounded-2xl bg-slate-200/70 dark:bg-slate-800" />
           <div className="space-y-4">
-            <div className="h-6 w-32 rounded-full bg-slate-200" />
-            <div className="h-8 w-full rounded-xl bg-slate-200" />
-            <div className="h-8 w-2/3 rounded-xl bg-slate-200" />
-            <div className="h-10 w-36 rounded-xl bg-slate-200 mt-4" />
-            <div className="h-24 w-full rounded-xl bg-slate-200 mt-4" />
-            <div className="h-12 w-full rounded-xl bg-slate-200 mt-6" />
+            <div className="h-6 w-32 rounded-full bg-slate-200 dark:bg-slate-800" />
+            <div className="h-8 w-full rounded-xl bg-slate-200 dark:bg-slate-800" />
+            <div className="h-8 w-2/3 rounded-xl bg-slate-200 dark:bg-slate-800" />
+            <div className="h-10 w-36 rounded-xl bg-slate-200 dark:bg-slate-800 mt-4" />
+            <div className="h-24 w-full rounded-xl bg-slate-200 dark:bg-slate-800 mt-4" />
+            <div className="h-12 w-full rounded-xl bg-slate-200 dark:bg-slate-800 mt-6" />
           </div>
         </div>
       </div>
@@ -110,21 +111,21 @@ export const ProductDetailPage: React.FC = () => {
     return (
       <div
         role="alert"
-        className="mx-auto my-12 max-w-xl rounded-2xl border border-rose-200 bg-white p-8 text-center shadow-xs"
+        className="mx-auto my-12 max-w-xl rounded-2xl border border-rose-200 dark:border-rose-900/60 bg-white dark:bg-slate-900 p-8 text-center shadow-xs"
       >
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-100 text-rose-600">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400">
           <AlertCircle className="h-7 w-7" aria-hidden="true" />
         </div>
-        <h1 className="text-lg font-bold text-slate-900">
+        <h1 className="text-lg font-bold text-slate-900 dark:text-white">
           {error ?? 'პროდუქტი ვერ მოიძებნა'}
         </h1>
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
           შეამოწმეთ ბმული ან დაბრუნდით მთავარ კატალოგში.
         </p>
         <div className="mt-6 flex items-center justify-center gap-3">
           <Link
             to="/products"
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             <span>კატალოგში დაბრუნება</span>
@@ -157,28 +158,19 @@ export const ProductDetailPage: React.FC = () => {
   };
 
   return (
-    <div className="animate-page-enter space-y-12">
+    <div className="animate-page-enter space-y-8">
       {/* Breadcrumb Navigation */}
-      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate-500">
-        <Link
-          to="/products"
-          className="inline-flex items-center gap-1.5 font-semibold text-slate-700 hover:text-indigo-600 transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          <span>კატალოგში დაბრუნება</span>
-        </Link>
-        <span>/</span>
-        <span className="text-slate-400">{getCategoryLabel(product.category)}</span>
-        <span>/</span>
-        <span className="truncate max-w-xs font-medium text-slate-900">
-          {product.title}
-        </span>
-      </nav>
+      <Breadcrumbs
+        items={[
+          { label: getCategoryLabel(product.category) },
+          { label: product.title },
+        ]}
+      />
 
       {/* Main Product Showcase */}
-      <div className="grid grid-cols-1 gap-8 rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-xs lg:grid-cols-12">
+      <div className="grid grid-cols-1 gap-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xs lg:grid-cols-12 transition-colors duration-200">
         {/* LCP Hero Product Image */}
-        <div className="flex items-center justify-center rounded-2xl bg-slate-50/70 p-8 lg:col-span-5">
+        <div className="flex items-center justify-center rounded-2xl bg-slate-50/70 dark:bg-slate-800/50 p-8 lg:col-span-5">
           <img
             src={product.image}
             alt={product.title}
@@ -193,20 +185,20 @@ export const ProductDetailPage: React.FC = () => {
         <div className="flex flex-col justify-between space-y-6 lg:col-span-7">
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-2.5">
-              <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-700">
+              <span className="rounded-full bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 text-xs font-bold text-indigo-700 dark:text-indigo-400">
                 {getCategoryLabel(product.category)}
               </span>
-              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
+              <span className="rounded-full bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 text-xs font-bold text-emerald-700 dark:text-emerald-400">
                 მარაგშია
               </span>
               {quantityInCart > 0 && (
-                <span className="rounded-full bg-slate-900 px-3 py-1 text-xs font-bold text-white">
+                <span className="rounded-full bg-slate-900 dark:bg-slate-800 px-3 py-1 text-xs font-bold text-white">
                   კალათაშია: {quantityInCart} ც.
                 </span>
               )}
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
               {product.title}
             </h1>
 
@@ -219,38 +211,38 @@ export const ProductDetailPage: React.FC = () => {
                     className={`h-4 w-4 ${
                       idx < Math.round(product.rating.rate)
                         ? 'fill-amber-400 text-amber-400'
-                        : 'text-slate-300'
+                        : 'text-slate-300 dark:text-slate-600'
                     }`}
                   />
                 ))}
               </div>
-              <span className="text-sm font-bold text-slate-800">
+              <span className="text-sm font-bold text-slate-800 dark:text-slate-200">
                 {product.rating.rate.toFixed(1)} / 5.0
               </span>
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-slate-400 dark:text-slate-500">
                 ({product.rating.count} დადასტურებული შეფასება)
               </span>
             </div>
 
             {/* Price */}
-            <div className="flex items-baseline gap-3 border-y border-slate-100 py-4">
-              <span className="text-3xl font-extrabold text-indigo-600">
+            <div className="flex items-baseline gap-3 border-y border-slate-100 dark:border-slate-800 py-4">
+              <span className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
                 ${product.price.toFixed(2)}
               </span>
-              <span className="text-sm text-slate-400 line-through">
+              <span className="text-sm text-slate-400 dark:text-slate-500 line-through">
                 ${(product.price * 1.2).toFixed(2)}
               </span>
-              <span className="rounded-lg bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-800">
+              <span className="rounded-lg bg-amber-100 dark:bg-amber-950/60 px-2 py-0.5 text-xs font-bold text-amber-800 dark:text-amber-300">
                 დაზოგეთ 20% კოდით SHOPFLOW20
               </span>
             </div>
 
             {/* Description */}
             <div>
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 პროდუქტის აღწერა
               </h2>
-              <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 {product.description}
               </p>
             </div>
@@ -260,26 +252,26 @@ export const ProductDetailPage: React.FC = () => {
           <div className="space-y-5 pt-2">
             <div className="flex flex-wrap items-center gap-4">
               <div>
-                <span className="mb-1.5 block text-xs font-bold text-slate-700">
+                <span className="mb-1.5 block text-xs font-bold text-slate-700 dark:text-slate-300">
                   რაოდენობა
                 </span>
-                <div className="inline-flex items-center rounded-xl border border-slate-200 bg-slate-50 p-1">
+                <div className="inline-flex items-center rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1">
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                     aria-label="რაოდენობის შემცირება"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-700 hover:bg-white transition-colors cursor-pointer"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition-colors cursor-pointer"
                   >
                     <Minus className="h-4 w-4" aria-hidden="true" />
                   </button>
-                  <span className="min-w-10 text-center text-sm font-extrabold text-slate-900">
+                  <span className="min-w-10 text-center text-sm font-extrabold text-slate-900 dark:text-white">
                     {quantity}
                   </span>
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.min(99, q + 1))}
                     aria-label="რაოდენობის გაზრდა"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-700 hover:bg-white transition-colors cursor-pointer"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition-colors cursor-pointer"
                   >
                     <Plus className="h-4 w-4" aria-hidden="true" />
                   </button>
@@ -314,7 +306,7 @@ export const ProductDetailPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleBuyNow}
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-bold text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-slate-900 dark:bg-slate-800 px-6 py-3 text-sm font-bold text-white hover:bg-slate-800 dark:hover:bg-slate-700 transition-colors cursor-pointer"
                 >
                   <Zap className="h-4 w-4 text-amber-400" aria-hidden="true" />
                   <span>სწრაფი ყიდვა</span>
@@ -323,13 +315,13 @@ export const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Guarantees */}
-            <div className="grid grid-cols-1 gap-3 rounded-2xl bg-slate-50 p-4 sm:grid-cols-2 text-xs text-slate-600">
+            <div className="grid grid-cols-1 gap-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 p-4 sm:grid-cols-2 text-xs text-slate-600 dark:text-slate-300">
               <div className="flex items-center gap-2.5">
-                <Truck className="h-4 w-4 text-indigo-600 shrink-0" aria-hidden="true" />
+                <Truck className="h-4 w-4 text-indigo-600 dark:text-indigo-400 shrink-0" aria-hidden="true" />
                 <span>სწრაფი მიწოდება თბილისსა და რეგიონებში (1-3 სამუშაო დღე)</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" aria-hidden="true" />
+                <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" aria-hidden="true" />
                 <span>ოფიციალური გარანტია და 30-დღიანი დაბრუნების პოლიტიკა</span>
               </div>
             </div>
@@ -341,12 +333,12 @@ export const ProductDetailPage: React.FC = () => {
       {relatedProducts.length > 0 && (
         <section aria-labelledby="related-heading" className="space-y-5">
           <div className="flex items-center justify-between">
-            <h2 id="related-heading" className="text-xl font-extrabold text-slate-900">
+            <h2 id="related-heading" className="text-xl font-extrabold text-slate-900 dark:text-white">
               მსგავსი პროდუქტები კატეგორიაში
             </h2>
             <Link
               to="/products"
-              className="text-xs font-bold text-indigo-600 hover:underline"
+              className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
             >
               ყველას ნახვა →
             </Link>

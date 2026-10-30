@@ -29,8 +29,12 @@
 
 ### 1. კომპონენტური არქიტექტურა და მკაცრი TypeScript
 - ყველა კომპონენტის პროპსი, სტეიტი და API-დან მიღებული მონაცემი მკაცრად არის ტიპიზირებული [`src/types/index.ts`](src/types/index.ts)-ში.
-- მოდულური კომპონენტები:
-  - [`Header`](src/components/Header.tsx) — ნავიგაცია, პრომო-ბანერი და კალათის ინდიკატორი ანიმაციით.
+- **ლეიაუთი (`MainLayout`):** [`src/layouts/MainLayout.tsx`](src/layouts/MainLayout.tsx) აერთიანებს `Header`-ს, React Router-ის `<Outlet />`-ს, `CartDrawer`-ს, `Notification`-სა და `Footer`-ს.
+- **მოდულური კომპონენტები:**
+  - [`Header`](src/components/Header.tsx) — ნავიგაცია, პრომო-ბანერი, `ThemeToggle` და კალათის ინდიკატორი ანიმაციით.
+  - [`Footer`](src/components/Footer.tsx) — ფუტერი გარანტიების ბლოკით, ბმულებით, საავტორო უფლებებითა და თემის გადამრთველით.
+  - [`ThemeToggle`](src/components/ThemeToggle.tsx) — ანიმაციური გადამრთველი ღილაკი Light და Dark რეჟიმებისთვის (`Sun` / `Moon`).
+  - [`Breadcrumbs`](src/components/Breadcrumbs.tsx) — პურის ნამცეცები პროდუქტის დეტალურ და შეკვეთის გვერდებზე მარტივი ნავიგაციისთვის.
   - [`ProductList`](src/components/ProductList.tsx) — კატალოგი ძიებით, კატეგორიის ფილტრით, ფასის სლაიდერითა და სორტირებით.
   - [`ProductCard`](src/components/ProductCard.tsx) — პროდუქტის ბარათი (`React.memo`, LCP სურათების ოპტიმიზაციით `fetchPriority="high"` / `loading="lazy"`).
   - [`CartDrawer`](src/components/CartDrawer.tsx) — მოცურავე კალათის პანელი უფასო მიწოდების პროგრეს-ბარით.
@@ -38,10 +42,12 @@
   - [`Notification`](src/components/Notification.tsx) — Toast შეტყობინებების სისტემა (`aria-live="polite"`).
 
 ### 2. სტეიტ მენეჯმენტი და ჰუკები (State Management & Hooks)
-- **Global State:** [`CartContext`](src/context/CartContext.tsx) მართავს კალათის მონაცემებს (დამატება, წაშლა, რაოდენობის შეცვლა, ქვეჯამი, ფასდაკლება, მიწოდება, საერთო თანხა).
+- **Global Cart State:** [`CartContext`](src/context/CartContext.tsx) მართავს კალათის მონაცემებს (დამატება, წაშლა, რაოდენობის შეცვლა, ქვეჯამი, ფასდაკლება, მიწოდება, საერთო თანხა).
+- **Global Theme State (Light / Dark Mode):** [`ThemeContext`](src/context/ThemeContext.tsx) მართავს აპლიკაციის თემას Context API-ით, სისტემური თემის ამოცნობითა და `localStorage`-ში შენახვით.
 - **Custom Hooks:**
+  - [`useTheme`](src/hooks/useTheme.ts) — თემის გლობალურ კონტექსტთან წვდომისთვის (`theme`, `toggleTheme`, `setTheme`).
   - [`useCart`](src/hooks/useCart.ts) — გლობალური კალათის კონტექსტთან მკაცრად ტიპიზირებული წვდომისთვის.
-  - [`useLocalStorage`](src/hooks/useLocalStorage.ts) — კალათისა და აქტიური პრომო-კოდის `localStorage`-ში შესანახად.
+  - [`useLocalStorage`](src/hooks/useLocalStorage.ts) — მონაცემების ბრაუზერის `localStorage`-ში უსაფრთხოდ შესანახად.
   - [`useDebounce`](src/hooks/useDebounce.ts) — პროდუქტების ძიების ოპტიმიზაციისთვის.
 - **React Hooks:** აქტიურად გამოყენებულია `useState`, `useEffect`, `useMemo` და `useCallback`.
 
@@ -50,6 +56,7 @@
 - ვიზუალურად დამუშავებულია როგორც **Loading** (Skeleton ბარათები), ისე **Error** მდგომარეობა (კატალოგში ასევე ჩაშენებულია `Error ტესტი` ღილაკი შეცდომის ვიზუალური ეკრანის სწრაფი შემოწმებისთვის).
 
 ### 4. როუტინგი და ზარმაცი ჩატვირთვა (Routing & Lazy Loading)
+- როუტინგი გამოყოფილია ცალკე კომპონენტად: [`src/routes/AppRoutes.tsx`](src/routes/AppRoutes.tsx).
 - `/products` — მთავარი კატალოგი ([`ProductsPage`](src/pages/ProductsPage.tsx))
 - `/products/:id` — პროდუქტის დეტალური გვერდი ([`ProductDetailPage`](src/pages/ProductDetailPage.tsx))
 - `/checkout` და `/cart` — კალათა და შეკვეთის გაფორმების გვერდი ([`CheckoutPage`](src/pages/CheckoutPage.tsx)), რომელიც იტვირთება ზარმაცად **`React.lazy`** და **`Suspense`**-ის გამოყენებით.
